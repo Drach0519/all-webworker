@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="num">0</h2>
+    <button>Click my</button>
+</body>
+    <script>
+        // let a =0;
+        // function rendomNumber(callback){
+        //     setTimeout(function(){
+        //         let a= Math.ceil(Math.random()*(10-0+1)*100);
+        //         if(callback) callback(a)
+        //     })
+        // }
+    var w;
+        document.querySelector("button").addEventListener("click", function(){
+            if(typeof(Worker)!=="undefined"){
+                if(typeof(w)=="undefined"){
+                    w = new Worker("workers.js");
+                }
+                w.onmessage = function(event){
+                    document.querySelector("#num").innerHTML=event.data;
+                };
+            }else{
+                document.querySelector("#num").innerHTML="sorry";
+            }
+
+        });
+
+    </script>
+</html>
